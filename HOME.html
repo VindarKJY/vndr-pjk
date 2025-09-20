@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Navbar with Animated Highlight</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        margin-top: 50px;
+      }
+      .navbar {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow-x: auto;
+      }
+      .navbar ul {
+        list-style: none;
+        display: flex;
+        padding: 0;
+        margin: 0;
+        position: relative;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: #333;
+        padding: 10px 20px;
+        position: relative;
+        z-index: 1;
+        border-radius: 20px;
+        transition: color 0.3s;
+        font-size: 1rem;
+        display: block;
+      }
+      .navbar a.active {
+        color: #ff5722;
+      }
+      /* Highlight box styles */
+      .navbar .highlight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(255, 87, 34, 0.12);
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(255,87,34,0.08);
+        transition:
+          left 0.4s cubic-bezier(.4,0,.2,1),
+          width 0.4s cubic-bezier(.4,0,.2,1);
+        z-index: 0;
+        pointer-events: none;
+      }
+      /* Responsive styles */
+      @media (max-width: 600px) {
+        .navbar ul {
+          flex-wrap: wrap;
+        }
+        .navbar a {
+          padding: 10px 12px;
+          font-size: 0.95rem;
+        }
+      }
+      /* Rest of your styles ... */
+      .utama {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        padding-top: 0;
+        flex-wrap: wrap;
+      }
+      .kiri, .kanan {
+        min-width: 260px;
+        max-width: 100%;
+      }
+      .kiri {
+        flex: 4;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .kanan {
+        flex: 6;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+      .title {
+        background: #fff;
+        margin: 17px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 0.5px;
+      }
+      #page-content {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+      }
+      #page-content.page-in {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      #page-content.fade-out {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        transition: opacity 0.5s, transform 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <span class="highlight"></span>
+        <li><a href="my.portofolio.html">Home</a></li>
+        <li><a href="about.html">Tentang</a></li>
+        <li><a href="layanan.html">Layanan</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
+    <div id="page-content">
+      <div class="title">
+        <h1>Selamat Datang di Halaman Home</h1>
+      </div>
+      <div class="utama">
+        <div class="kiri">
+          <img
+            src="man-jas-no.bg.png"
+            alt="Foto Profil sang ganteng rupawan sang avin"
+            width="150"
+            style="border-radius: 50%; margin-top: 20px; background-color: #265"
+          />
+          <h1>Rizky Maulana</h1>
+          <p>Web Developer | Programmer | Designer</p>
+          <p>
+            Halo! Saya Viendar Faza Prasetya, seorang web developer yang
+            bersemangat menciptakan solusi digital yang inovatif dan menarik.
+            Dengan pengalaman dalam pengembangan web, saya berkomitmen untuk
+            memberikan hasil terbaik bagi setiap proyek yang saya tangani.
+          </p>
+          <p>
+            Keahlian saya meliputi HTML, CSS, JavaScript, dan berbagai framework
+            populer seperti React dan Vue.js. Saya juga memiliki pengalaman
+            dalam desain UI/UX untuk memastikan bahwa setiap aplikasi tidak
+            hanya fungsional tetapi juga menyenangkan untuk digunakan.
+          </p>
+          <p>
+            Saya selalu terbuka untuk tantangan baru dan peluang kolaborasi.
+            Jangan ragu untuk menghubungi saya jika Anda tertarik untuk bekerja
+            sama atau ingin mengetahui lebih lanjut tentang apa yang saya
+            lakukan.
+          </p>
+        </div>
+        <div class="kanan">
+          <h2 id="home">home</h2>
+          <p>Ini adalah konten utama dari halaman home.</p>
+          <p>
+            <!-- ... (content omitted for brevity) ... -->
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+            nemo. Facere velit quasi dolor cum repellendus laborum quibusdam
+            officiis cupiditate placeat aliquam distinctio sunt aut eveniet,
+            tenetur eaque dolorem odio inventore unde? Alias ipsa beatae minus
+            ducimus cumque dolorem ad tenetur fuga mollitia? Sit, debitis quae
+            dicta autem, reprehenderit quas nisi molestiae est doloribus id
+            totam laudantium soluta repellat atque esse fuga sequi ipsam quos
+            distinctio laborum tempora assumenda error. Odio doloribus
+            necessitatibus non facilis omnis animi natus, quis in tenetur
+            fugiat. Quia impedit harum aut similique debitis odit laborum quos
+            blanditiis quae sapiente obcaecati delectus corrupti quam sit
+            nostrum, totam id unde reiciendis voluptatum accusantium, labore
+            corporis! Pariatur, perferendis suscipit veniam, eveniet corporis
+            beatae molestiae dolore animi voluptas amet reprehenderit. Maiores
+            rem nostrum perspiciatis, blanditiis labore aliquam cupiditate
+            numquam laborum sed. Nisi fugit temporibus et explicabo minus.
+            Debitis pariatur ad nulla aperiam harum suscipit, natus dicta,
+            consectetur adipisci, quia necessitatibus accusamus alias ratione?
+            Ad illum quam tempore eius praesentium molestias accusantium fugit
+            ullam beatae. Voluptatibus porro esse minima laboriosam magnam
+            facilis enim cumque, nobis officiis aperiam voluptas adipisci veniam
+            minus impedit explicabo dolorem. Cupiditate sit facere molestias!
+            Doloremque nobis exercitationem incidunt consequatur quod itaque nam
+            odit pariatur recusandae temporibus.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      // --- Responsive Animated Highlight Navbar ---
+      const navbar = document.querySelector('.navbar');
+      const navList = navbar.querySelector('ul');
+      const highlight = navbar.querySelector('.highlight');
+      const navLinks = Array.from(navbar.querySelectorAll('a'));
+
+      // Helper: Get the best-matching link for current location
+      function getActiveLink() {
+        const current = window.location.pathname.split('/').pop();
+        // Try to match by href (ignoring possible relative/absolute differences)
+        let best = navLinks[0];
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === current) {
+            best = link;
+          }
+        });
+        return best;
+      }
+
+      // Move the highlight box to the active link
+      function moveHighlightTo(link, animate = true) {
+        const linkRect = link.getBoundingClientRect();
+        const listRect = navList.getBoundingClientRect();
+        // Calculate position relative to navList
+        const left = linkRect.left - listRect.left + navList.scrollLeft;
+        const width = linkRect.width;
+        highlight.style.left = left + 'px';
+        highlight.style.width = width + 'px';
+        highlight.style.top = 0;
+        highlight.style.height = linkRect.height + 'px';
+        // Optionally disable animation for instant move
+        if (!animate) {
+          highlight.style.transition = 'none';
+          // Force reflow to apply transition removal
+          void highlight.offsetWidth;
+          highlight.style.transition = '';
+        }
+      }
+
+      // Set active class and persist state
+      function setActive(link) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        // Persist active href in localStorage
+        localStorage.setItem('navbar-active', link.getAttribute('href'));
+      }
+
+      // On page load: restore active state and move highlight
+      function initNavbarHighlight() {
+        // Try to restore from localStorage, else use current page
+        const savedHref = localStorage.getItem('navbar-active');
+        let activeLink = navLinks.find(l => l.getAttribute('href') === savedHref);
+        if (!activeLink) {
+          activeLink = getActiveLink();
+        }
+        setActive(activeLink);
+        moveHighlightTo(activeLink, false);
+
+        // On resize, reposition highlight
+        window.addEventListener('resize', () => {
+          const currentActive = navbar.querySelector('a.active');
+          if (currentActive) moveHighlightTo(currentActive, false);
+        });
+
+        // On scroll (for horizontal nav), reposition highlight
+        navList.addEventListener('scroll', () => {
+          const currentActive = navbar.querySelector('a.active');
+          if (currentActive) moveHighlightTo(currentActive, false);
+        });
+
+        // On nav link click, animate highlight and set active
+        navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (href && href !== window.location.pathname.split('/').pop()) {
+              e.preventDefault();
+              setActive(link);
+              moveHighlightTo(link, true);
+              // Fade out content, then navigate
+              const pageContent = document.getElementById("page-content");
+              if (pageContent) {
+                pageContent.classList.remove("page-in");
+                pageContent.classList.add("fade-out");
+                setTimeout(() => {
+                  window.location.href = href;
+                }, 500);
+              } else {
+                window.location.href = href;
+              }
+            }
+          });
+        });
+      }
+
+      // On DOM ready, initialize highlight
+      window.addEventListener('DOMContentLoaded', () => {
+        initNavbarHighlight();
+        // Fade in content
+        setTimeout(() => {
+          const pageContent = document.getElementById("page-content");
+          if (pageContent) pageContent.classList.add("page-in");
+        }, 50);
+      });
+    </script>
+  </body>
+</html>
