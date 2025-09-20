@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contoh1</title>
+    <style>
+        /* Style dasar */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.navbar {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 20px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ff5722;
+}
+
+/* Garis indikator */
+.indicator {
+  position: absolute;
+  top: -15px; /* Garis di atas */
+  left: 0;
+  width: 0;
+  height: 10px;
+  background: #ff5722;
+  transition: all 0.3s ease;
+  border-radius: 5cm;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="CONTOH2.html">Tentang</a></li>
+            <li><a href="#">Layanan</a></li>
+            <li><a href="#">Kontak</a></li>
+            <li><a href="#">Kontak</a></li>
+        </ul>
+        <span class="indicator"></span>
+    </nav>
+    <script>
+        const links = document.querySelectorAll('.navbar a');
+const indicator = document.querySelector('.indicator');
+
+function moveIndicator(element) {
+  const { offsetLeft, offsetWidth } = element;
+    indicator.style.width = `${offsetWidth}px`;
+    indicator.style.left = `${offsetLeft}px`;
+}
+
+// Atur posisi awal (Home)
+moveIndicator(document.querySelector('.navbar a.active'));
+
+// Event listener untuk setiap link
+links.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    // Hapus class active lama
+    links.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    // Pindahkan garis
+    moveIndicator(link);
+  });
+});
+    </script>
+</body>
+</html>

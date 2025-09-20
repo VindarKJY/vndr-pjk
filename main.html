@@ -1,0 +1,327 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mainpage</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #d9d9d9;
+      }
+      #gambar-avin {        
+        display: flex;
+        background-color: #947f57;
+        max-width: 100%; /* Gambar tidak melebihi lebar kontainer */
+        height: auto;
+        border-top-left-radius: 150px;
+        border-top-right-radius: 150px;
+        position: absolute;
+        top: -15px;
+        z-index: 10; /* Di atas elemen lain */
+      }
+
+      .container-utama {
+        background-color: #d9d9d9;
+        width: 100%;
+        height: 100vh;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+      }
+      .container1 {
+        max-width: 300px; /* Batasi ukuran gambar */
+        height: auto;
+        display: block;
+      }
+      .container2 {
+        display: inline-flex;
+        flex-direction: column;
+        padding-left: 40%;
+        padding-top: 10%;
+      }
+      .menu {
+        position: relative;
+        padding-left: 29%;
+      }
+      .menu-ul {
+        display: flex;
+        gap: 20px;
+        list-style-type: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .menu-ul li {
+        border-radius: 10%;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        border: #947f57;
+        padding: 5px;
+      }
+      .menu-li {
+        text-decoration: none;
+        color: 333;
+        position: relative;
+        transition: color 0.5s ease;
+      }
+      .menu-li:hover {
+        color: #947f57;
+      }
+      .menu-li::after {
+        content: "";
+        position: absolute;
+        border-radius: 20%;
+        left: 50%;
+        bottom: 25px;
+        width: 100%;
+        height: 8px;
+        background-color: #947f57;
+        transform: translateX(-50%) scaleX(0); /* Skala 0 = tidak terlihat */
+        transform-origin: center; /* Titik skala di tengah */
+        transition: transform 0.5s ease; /* Animasi transform */
+      }
+      .menu-li:hover::after {
+        transform: translateX(-50%) scaleX(1); /* Melebar dari tengah */
+      }
+      button {
+        background-color: #947f57;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      #btng1 {
+        position: absolute;
+        top: 280px; /* Geser posisi */
+        left: 362px;
+        width: 40px;
+        height: 50px;
+        z-index: 10; /* Di atas elemen lain */
+        pointer-events: none; /* (opsional) Biar klik tetap ke elemen di bawah */
+      }
+      #btng2 {
+        position: absolute;
+        top: -45px; /* Geser posisi */
+        left: 90px;
+        width: 300px;
+        height: 300px;
+        pointer-events: none; /* (opsional) Biar klik tetap ke elemen di bawah */
+      }
+      #bntg3 {
+        position: absolute;
+        top: 435px; /* Geser posisi */
+        left: 76px;
+        width: 45px;
+        height: 50px;
+        z-index: 10; /* Di atas elemen lain */
+        pointer-events: none; /* (opsional) Biar klik tetap ke elemen di bawah */
+      }
+      #button-log {
+        width: 50px;
+        height: 50px;
+        padding-bottom: 5px;
+        display: inline-block;
+        vertical-align: middle;
+        pointer-events: none; /* (opsional) Biar klik tetap ke elemen di bawah */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="menu">
+      <ul class="menu-ul">
+        <li><a class="menu-li" href="#">home</a></li>
+        <li><a class="menu-li" href="taks1.html">about</a></li>
+        <li><a class="menu-li" href="taks2.html">service</a></li>
+        <li><a class="menu-li" href="taks2.py">portofolio</a></li>
+        <li><a class="menu-li" href="12345.py">blog</a></li>
+        <li><a class="menu-li" href="contoh.html">contact</a></li>
+      </ul>
+    </nav>
+    <div class="container-utama">
+      <div class="content">
+        <div class="container1">
+          <img
+            src="image/gamabar_avin-removebg-preview.png"
+            alt="gambar-avin"
+            id="gambar-avin"
+          />
+
+          <svg
+            id="btng1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="378"
+            zoomAndPan="magnify"
+            viewBox="0 0 283.5 283.500005"
+            height="378"
+            preserveAspectRatio="xMidYMid meet"
+            version="1.0"
+          >
+            <defs>
+              <clipPath id="337530a76a">
+                <path
+                  d="M 0.492188 0.492188 L 274.542969 0.492188 L 274.542969 274.542969 L 0.492188 274.542969 Z M 0.492188 0.492188 "
+                  clip-rule="nonzero"
+                />
+              </clipPath>
+              <clipPath id="3661f8c678">
+                <rect x="0" width="275" y="0" height="275" />
+              </clipPath>
+            </defs>
+            <g transform="matrix(1, 0, 0, 1, 4, 4)">
+              <g clip-path="url(#3661f8c678)">
+                <g clip-path="url(#337530a76a)">
+                  <path
+                    fill="#000000"
+                    d="M 274.519531 137.503906 C 171.757812 156.421875 156.421875 171.757812 137.507812 274.519531 C 118.589844 171.757812 103.253906 156.421875 0.492188 137.503906 C 103.253906 118.589844 118.589844 103.253906 137.503906 0.492188 C 156.421875 103.253906 171.757812 118.589844 274.519531 137.503906 Z M 274.519531 137.503906 "
+                    fill-opacity="1"
+                    fill-rule="nonzero"
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
+
+          <div>
+            <svg
+              id="btng2"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="1920"
+              zoomAndPan="magnify"
+              viewBox="0 0 1440 809.999993"
+              height="1080"
+              preserveAspectRatio="xMidYMid meet"
+              version="1.0"
+            >
+              <defs>
+                <clipPath id="26aab38d78">
+                  <path
+                    d="M 122.945312 188 L 1316.945312 188 L 1316.945312 622 L 122.945312 622 Z M 122.945312 188 "
+                    clip-rule="nonzero"
+                  />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#26aab38d78)">
+                <path
+                  fill="#3d3d3d"
+                  d="M 1033.378906 255.257812 L 974.484375 188.148438 L 926.097656 240.476562 C 857.582031 233.394531 788.878906 229.867188 719.996094 229.894531 C 430.570312 229.894531 122.945312 292.273438 122.945312 407.863281 C 122.945312 473.707031 222.769531 522.285156 362.148438 551.898438 L 423.476562 621.777344 L 471.097656 570.261719 C 553.734375 580.738281 636.699219 585.929688 719.996094 585.835938 C 1009.425781 585.835938 1317.050781 523.476562 1317.050781 407.863281 C 1317.050781 335.214844 1195.511719 283.675781 1033.378906 255.257812 Z M 1124.964844 504.179688 C 1017.019531 534.058594 873.199219 550.488281 719.996094 550.488281 C 641.347656 550.679688 562.984375 546.070312 484.902344 536.660156 L 425.457031 468.929688 L 378.769531 519.417969 C 356.390625 514.808594 335.089844 509.722656 315.027344 504.179688 C 239.25 483.210938 158.289062 446.910156 158.289062 407.863281 C 158.289062 368.816406 239.25 332.515625 315.027344 311.570312 C 422.976562 281.695312 566.792969 265.242188 719.996094 265.242188 C 787.273438 265.242188 852.734375 268.417969 914.160156 274.507812 L 972.503906 340.996094 L 1020.910156 288.742188 C 1058.285156 295.140625 1093.25 302.757812 1125.0625 311.570312 C 1200.839844 332.515625 1281.800781 368.890625 1281.800781 407.863281 C 1281.800781 446.839844 1200.742188 483.210938 1124.964844 504.179688 Z M 1124.964844 504.179688 "
+                  fill-opacity="1"
+                  fill-rule="nonzero"
+                />
+              </g>
+            </svg>
+          </div>
+
+          <svg
+            id="bntg3"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="378"
+            zoomAndPan="magnify"
+            viewBox="0 0 283.5 283.500005"
+            height="378"
+            preserveAspectRatio="xMidYMid meet"
+            version="1.0"
+          >
+            <defs>
+              <clipPath id="337530a76a">
+                <path
+                  d="M 0.492188 0.492188 L 274.542969 0.492188 L 274.542969 274.542969 L 0.492188 274.542969 Z M 0.492188 0.492188 "
+                  clip-rule="nonzero"
+                />
+              </clipPath>
+              <clipPath id="3661f8c678">
+                <rect x="0" width="275" y="0" height="275" />
+              </clipPath>
+            </defs>
+            <g transform="matrix(1, 0, 0, 1, 4, 4)">
+              <g clip-path="url(#3661f8c678)">
+                <g clip-path="url(#337530a76a)">
+                  <path
+                    fill="#000000"
+                    d="M 274.519531 137.503906 C 171.757812 156.421875 156.421875 171.757812 137.507812 274.519531 C 118.589844 171.757812 103.253906 156.421875 0.492188 137.503906 C 103.253906 118.589844 118.589844 103.253906 137.503906 0.492188 C 156.421875 103.253906 171.757812 118.589844 274.519531 137.503906 Z M 274.519531 137.503906 "
+                    fill-opacity="1"
+                    fill-rule="nonzero"
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="container2">
+          <h1>
+            <mark
+              style="
+                background-color: #d9d9d9;
+                font-family: 'Times New Roman', Times, serif;
+              "
+              >hello,im</mark
+            >
+            viendar faza
+          </h1>
+          <h4>
+            i'am a student Creative Graphic Designer with 10 years experience.
+            Proficient in Canva Designer, specializing in print and digital
+            design. Proven track record of delivering visually stunning and
+            effective solutions.
+          </h4>
+          <div>
+            <button
+              oneclick="window.location.href='https://www.canva.com/design/DAGqP5nQAKw/DL4245gKKw29PN3DHIO-tw/view?utm_content=DAGqP5nQAKw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4458017dcd'"
+            >
+              Get Started
+            </button>
+
+            <svg
+              id="button-log"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="1920"
+              zoomAndPan="magnify"
+              viewBox="0 0 1440 809.999993"
+              height="1080"
+              preserveAspectRatio="xMidYMid meet"
+              version="1.0"
+            >
+              <defs>
+                <clipPath id="b85946bc47">
+                  <path
+                    d="M 344.570312 29.570312 L 1095.320312 29.570312 L 1095.320312 780.320312 L 344.570312 780.320312 Z M 344.570312 29.570312 "
+                    clip-rule="nonzero"
+                  />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#b85946bc47)">
+                <path
+                  fill="#3d3d3d"
+                  d="M 719.996094 780.425781 C 512.65625 780.425781 344.570312 612.339844 344.570312 404.996094 C 344.570312 197.65625 512.65625 29.570312 719.996094 29.570312 C 927.339844 29.570312 1095.425781 197.65625 1095.425781 404.996094 C 1095.425781 612.339844 927.339844 780.425781 719.996094 780.425781 Z M 719.996094 780.425781 "
+                  fill-opacity="1"
+                  fill-rule="nonzero"
+                />
+              </g>
+              <path
+                fill="#e8e8e8"
+                d="M 664.140625 599.15625 L 643.597656 578.609375 L 817.203125 405 L 643.597656 231.382812 L 664.140625 210.839844 L 858.300781 405 Z M 664.140625 599.15625 "
+                fill-opacity="1"
+                fill-rule="nonzero"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

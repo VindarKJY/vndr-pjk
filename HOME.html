@@ -56,10 +56,9 @@
         height: 100%;
         background: rgba(255, 87, 34, 0.12);
         border-radius: 20px;
-        box-shadow: 0 2px 8px rgba(255,87,34,0.08);
-        transition:
-          left 0.4s cubic-bezier(.4,0,.2,1),
-          width 0.4s cubic-bezier(.4,0,.2,1);
+        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.08);
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 0;
         pointer-events: none;
       }
@@ -83,7 +82,8 @@
         padding-top: 0;
         flex-wrap: wrap;
       }
-      .kiri, .kanan {
+      .kiri,
+      .kanan {
         min-width: 260px;
         max-width: 100%;
       }
@@ -114,7 +114,8 @@
       #page-content {
         opacity: 0;
         transform: translateY(40px) scale(0.98);
-        transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       }
       #page-content.page-in {
         opacity: 1;
@@ -149,7 +150,7 @@
             width="150"
             style="border-radius: 50%; margin-top: 20px; background-color: #265"
           />
-          <h1>Rizky Maulana</h1>
+          <h1>Viendar Faza Prasetya</h1>
           <p>Web Developer | Programmer | Designer</p>
           <p>
             Halo! Saya Viendar Faza Prasetya, seorang web developer yang
@@ -205,18 +206,18 @@
     </div>
     <script>
       // --- Responsive Animated Highlight Navbar ---
-      const navbar = document.querySelector('.navbar');
-      const navList = navbar.querySelector('ul');
-      const highlight = navbar.querySelector('.highlight');
-      const navLinks = Array.from(navbar.querySelectorAll('a'));
+      const navbar = document.querySelector(".navbar");
+      const navList = navbar.querySelector("ul");
+      const highlight = navbar.querySelector(".highlight");
+      const navLinks = Array.from(navbar.querySelectorAll("a"));
 
       // Helper: Get the best-matching link for current location
       function getActiveLink() {
-        const current = window.location.pathname.split('/').pop();
+        const current = window.location.pathname.split("/").pop();
         // Try to match by href (ignoring possible relative/absolute differences)
         let best = navLinks[0];
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === current) {
+        navLinks.forEach((link) => {
+          if (link.getAttribute("href") === current) {
             best = link;
           }
         });
@@ -230,32 +231,34 @@
         // Calculate position relative to navList
         const left = linkRect.left - listRect.left + navList.scrollLeft;
         const width = linkRect.width;
-        highlight.style.left = left + 'px';
-        highlight.style.width = width + 'px';
+        highlight.style.left = left + "px";
+        highlight.style.width = width + "px";
         highlight.style.top = 0;
-        highlight.style.height = linkRect.height + 'px';
+        highlight.style.height = linkRect.height + "px";
         // Optionally disable animation for instant move
         if (!animate) {
-          highlight.style.transition = 'none';
+          highlight.style.transition = "none";
           // Force reflow to apply transition removal
           void highlight.offsetWidth;
-          highlight.style.transition = '';
+          highlight.style.transition = "";
         }
       }
 
       // Set active class and persist state
       function setActive(link) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+        navLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
         // Persist active href in localStorage
-        localStorage.setItem('navbar-active', link.getAttribute('href'));
+        localStorage.setItem("navbar-active", link.getAttribute("href"));
       }
 
       // On page load: restore active state and move highlight
       function initNavbarHighlight() {
         // Try to restore from localStorage, else use current page
-        const savedHref = localStorage.getItem('navbar-active');
-        let activeLink = navLinks.find(l => l.getAttribute('href') === savedHref);
+        const savedHref = localStorage.getItem("navbar-active");
+        let activeLink = navLinks.find(
+          (l) => l.getAttribute("href") === savedHref
+        );
         if (!activeLink) {
           activeLink = getActiveLink();
         }
@@ -263,22 +266,22 @@
         moveHighlightTo(activeLink, false);
 
         // On resize, reposition highlight
-        window.addEventListener('resize', () => {
-          const currentActive = navbar.querySelector('a.active');
+        window.addEventListener("resize", () => {
+          const currentActive = navbar.querySelector("a.active");
           if (currentActive) moveHighlightTo(currentActive, false);
         });
 
         // On scroll (for horizontal nav), reposition highlight
-        navList.addEventListener('scroll', () => {
-          const currentActive = navbar.querySelector('a.active');
+        navList.addEventListener("scroll", () => {
+          const currentActive = navbar.querySelector("a.active");
           if (currentActive) moveHighlightTo(currentActive, false);
         });
 
         // On nav link click, animate highlight and set active
-        navLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            const href = link.getAttribute('href');
-            if (href && href !== window.location.pathname.split('/').pop()) {
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            const href = link.getAttribute("href");
+            if (href && href !== window.location.pathname.split("/").pop()) {
               e.preventDefault();
               setActive(link);
               moveHighlightTo(link, true);
@@ -299,7 +302,7 @@
       }
 
       // On DOM ready, initialize highlight
-      window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("DOMContentLoaded", () => {
         initNavbarHighlight();
         // Fade in content
         setTimeout(() => {
