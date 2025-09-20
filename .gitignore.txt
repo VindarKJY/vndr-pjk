@@ -1,0 +1,4 @@
+# Abaikan file sistem dan cache
+*.log
+*.tmp
+node_modules/
