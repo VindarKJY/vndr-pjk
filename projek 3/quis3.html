@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Interaktif</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f2f5;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #question {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    #answers button {
+      display: block;
+      width: 100%;
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #answers button:hover {
+      background: #e6f0ff;
+    }
+    #score {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Kuis Interaktif</h1>
+    <div id="question">Memuat soal...</div>
+    <div id="answers"></div>
+    <div id="score"></div>
+  </div>
+
+  <script>
+    // Soal-soal kuis
+    let questions = [
+      {
+        question: "Planet apa yang disebut Planet Merah?",
+        answers: ["Venus", "Mars", "Jupiter", "Merkurius"],
+        correct: 1
+      },
+      {
+        question: "Siapa penemu lampu pijar?",
+        answers: ["Albert Einstein", "Isaac Newton", "Thomas Edison", "Nikola Tesla"],
+        correct: 2
+      },
+      {
+        question: "Ibukota Indonesia adalah?",
+        answers: ["Bandung", "Surabaya", "Jakarta", "Medan"],
+        correct: 2
+      },
+      {
+        question: "Hasil dari 9 x 7 adalah?",
+        answers: ["56", "63", "72", "77"],
+        correct: 1
+      }
+    ];
+
+    // Fungsi acak array (Fisher-Yates)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // Acak urutan soal
+    shuffle(questions);
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionElem = document.getElementById("question");
+    const answersElem = document.getElementById("answers");
+    const scoreElem = document.getElementById("score");
+
+    function showQuestion() {
+      // Jika semua soal terjawab
+      if (currentQuestion >= questions.length) {
+        questionElem.textContent = "Kuis selesai!";
+        answersElem.innerHTML = "";
+        scoreElem.textContent = `Skor akhir: ${score} / ${questions.length}`;
+        return;
+      }
+
+      // Tampilkan soal
+      const q = questions[currentQuestion];
+      questionElem.textContent = q.question;
+      answersElem.innerHTML = "";
+      scoreElem.textContent = `Soal ${currentQuestion + 1} dari ${questions.length}`;
+
+      // Tampilkan pilihan jawaban
+      q.answers.forEach((ans, idx) => {
+        const btn = document.createElement("button");
+        btn.textContent = ans;
+        btn.onclick = () => {
+          if (idx === q.correct) {
+            score++;
+          }
+          currentQuestion++;
+          showQuestion();
+        };
+        answersElem.appendChild(btn);
+      });
+    }
+
+    // Mulai kuis
+    showQuestion();
+  </script>
+</body>
+</html>

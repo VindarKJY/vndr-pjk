@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #333;
+  padding: 10px;
+}
+
+.item {
+  background: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.flex-basis {
+  flex-basis: 200px;
+}
+
+.width {
+  width: 200px;
+}
+
+/* Highlight perbedaan */
+.highlight {
+  background: #ff9800 !important;
+}
+</style>
+</head>
+<body>
+
+<h3>1. Perbandingan Flex-basis vs Width</h3>
+
+<div class="container">
+  <div class="item flex-basis highlight">flex-basis: 200px</div>
+  <div class="item width">width: 200px</div>
+  <div class="item">Auto (default)</div>
+</div>
+
+</body>
+</html>

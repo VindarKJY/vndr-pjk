@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kuis Interaktif — MyQuiz</title>
+
+    <!-- Styling modern, responsive, dan animasi -->
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1220;
+        --muted: #94a3b8;
+        --accent: #7c3aed;
+        --accent-2: #06b6d4;
+        --success: #16a34a;
+        --danger: #ef4444;
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+        background: linear-gradient(180deg, #071025 0%, #0b1120 100%);
+        color: #e6eef8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 920px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: white;
+        font-size: 20px;
+        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25),
+          inset 0 -6px 12px rgba(0, 0, 0, 0.15);
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      p.lead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      main {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .left {
+        flex: 1 1 540px;
+        min-width: 260px;
+      }
+      .right {
+        width: 260px;
+        min-width: 220px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+      }
+
+      /* progress */
+      .progress-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .progress {
+        height: 12px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .progress > i {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        border-radius: 99px;
+        transition: width 450ms cubic-bezier(0.2, 0.9, 0.3, 1);
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* question */
+      .question {
+        font-size: 20px;
+        margin: 6px 0 14px;
+      }
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+      .opt {
+        background: var(--glass);
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      .opt:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(2, 6, 23, 0.4);
+      }
+      .opt.selected {
+        outline: 2px solid rgba(124, 58, 237, 0.22);
+        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.06);
+      }
+      .opt.correct {
+        background: linear-gradient(
+          90deg,
+          rgba(22, 163, 74, 0.12),
+          rgba(22, 163, 74, 0.06)
+        );
+        border: 1px solid rgba(22, 163, 74, 0.16);
+      }
+      .opt.wrong {
+        background: linear-gradient(
+          90deg,
+          rgba(239, 68, 68, 0.08),
+          rgba(239, 68, 68, 0.04)
+        );
+        border: 1px solid rgba(239, 68, 68, 0.12);
+      }
+
+      .opt span.label {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        color: var(--muted);
+      }
+      .opt .text {
+        flex: 1;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+      button.btn {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 18px rgba(124, 58, 237, 0.18);
+      }
+      button.secondary {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .small {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+
+      /* right panel */
+      .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .stat .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted);
+      }
+      .scorebig {
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--accent-2);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 10px;
+      }
+
+      /* responsive */
+      @media (max-width: 780px) {
+        .right {
+          width: 100%;
+        }
+        main {
+          flex-direction: column;
+        }
+      }
+
+      /* subtle entrance */
+      .fade-in {
+        animation: fadeIn 420ms ease both;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container fade-in" role="application" aria-label="MyQuiz">
+      <header>
+        <div class="brand">
+          <div class="logo">QZ</div>
+          <div>
+            <h1>MyQuiz — Kuis Interaktif</h1>
+            <p class="lead">
+              Latihan cepat, responsif, dan score riil. Siap dipakai di webmu!
+            </p>
+          </div>
+        </div>
+
+        <div class="meta">
+          Soal: <strong id="qcount">0</strong> / <strong id="total">0</strong>
+        </div>
+      </header>
+
+      <main>
+        <section class="left">
+          <div class="card">
+            <div class="progress-wrap">
+              <div class="progress" aria-hidden="true">
+                <i id="progressBar"></i>
+              </div>
+              <div class="meta">Progress</div>
+            </div>
+
+            <div style="height: 8px"></div>
+
+            <div id="quizArea">
+              <!-- question injected here -->
+              <div class="question" id="questionText">Memuat soal...</div>
+              <div class="options" id="optionsList" role="list"></div>
+              <div class="controls">
+                <button class="secondary small" id="prevBtn">Prev</button>
+                <button class="secondary small" id="nextBtn">Next</button>
+                <button class="btn small" id="submitBtn">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="explainCard" style="display: none">
+            <strong>Penjelasan:</strong>
+            <p id="explainText" style="color: var(--muted)">—</p>
+          </div>
+        </section>
+
+        <aside class="right">
+          <div class="card stat">
+            <div class="item">
+              <span>Skor</span><span class="scorebig" id="score">0</span>
+            </div>
+            <div class="item">
+              <span>Benar</span><span id="correctCount">0</span>
+            </div>
+            <div class="item">
+              <span>Salah</span><span id="wrongCount">0</span>
+            </div>
+            <div class="item">
+              <span>Soal tersisa</span><span id="leftCount">0</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <strong>Opsi Cepat</strong>
+            <div style="height: 8px"></div>
+            <button class="secondary small" id="resetBtn">Mulai Ulang</button>
+            <button class="secondary small" id="saveBtn">
+              Simpan Progress
+            </button>
+            <button class="secondary small" id="loadBtn">Muat Progress</button>
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>Tip: pakai tombol angka & arah untuk cepat memilih soal.</div>
+        <div>Made with viendar ❤️</div>
+      </footer>
+    </div>
+
+    <script>
+      /*
+  MyQuiz - single-file quiz app
+  Features:
+  - Multiple-choice questions
+  - Next/Prev navigation
+  - Progress bar and scoring
+  - Save/load progress in localStorage
+  - Keyboard shortcuts (numbers + arrows + Enter)
+  - Accessible markup & small animations
+*/
+
+      /* ====== QUESTIONS: edit/add as you like ====== 
+   Format: { q: "Pertanyaannya", opts: ["A","B","C","D"], a: indexOfCorrect (0-based), explain: "optional explanation" }
+*/
+      const QUESTIONS = [
+        {
+          q: "Planet manakah yang dikenal sebagai 'Planet Merah'?",
+          opts: ["Venus", "Mars", "Jupiter", "Saturnus"],
+          a: 1,
+          explain:
+            "Mars disebut Planet Merah karena permukaannya kaya besi oksida (karat) sehingga terlihat kemerahan.",
+        },
+        {
+          q: "Berapa jumlah planet dalam Tata Surya (mengacu ke planet yang diakui saat ini)?",
+          opts: ["7", "8", "9", "10"],
+          a: 1,
+          explain:
+            "Sejak 2006, Pluto diklasifikasikan kembali sebagai dwarf planet, sehingga planet utama ada 8.",
+        },
+        {
+          q: "Benda langit apa yang mengorbit planet dan kadang disebut 'bulan'?",
+          opts: ["Asteroid", "Komet", "Satelit", "Meteorit"],
+          a: 2,
+        },
+        {
+          q: "Apa sumber energi utama Matahari?",
+          opts: [
+            "Reaksi fusi nuklir",
+            "Reaksi kimia",
+            "Gravitasi",
+            "Gelombang radio",
+          ],
+          a: 0,
+          explain:
+            "Di inti Matahari terjadi fusi hidrogen menjadi helium yang melepaskan energi besar.",
+        },
+        {
+          q: "Apa nama galaksi tempat Bumi berada?",
+          opts: ["Andromeda", "Sombrero", "Bima Sakti", "Triangulum"],
+          a: 2,
+          explain: "Bumi berada di galaksi Bima Sakti (Milky Way).",
+        },
+        {
+          q: "Apa fenomena ketika Bulan berada di antara Bumi dan Matahari, sehingga menutupi Matahari?",
+          opts: ["Gerhana Bulan", "Gerhana Matahari", "Supermoon", "Blue Moon"],
+          a: 1,
+          explain: "Fenomena ini disebut Gerhana Matahari.",
+        },
+        {
+          q: "Planet terbesar dalam Tata Surya adalah?",
+          opts: ["Saturnus", "Jupiter", "Neptunus", "Uranus"],
+          a: 1,
+          explain:
+            "Jupiter adalah planet terbesar dengan diameter sekitar 11 kali Bumi.",
+        },
+        {
+          q: "Apa nama bintang terdekat dengan Bumi setelah Matahari?",
+          opts: ["Sirius", "Proxima Centauri", "Alpha Centauri A", "Vega"],
+          a: 1,
+          explain:
+            "Proxima Centauri adalah bintang terdekat setelah Matahari, berjarak sekitar 4.24 tahun cahaya.",
+        },
+        {
+          q: "Apa nama roket pertama yang membawa manusia ke bulan?",
+          opts: ["Apollo 11", "Sputnik 1", "Vostok 1", "Challenger"],
+          a: 0,
+          explain:
+            "Apollo 11 adalah misi NASA yang membawa Neil Armstrong dan Buzz Aldrin ke bulan pada tahun 1969.",
+        },
+        {
+          q: "Apa nama teleskop luar angkasa yang terkenal diluncurkan pada tahun 1990?",
+          opts: ["Kepler", "Hubble", "Spitzer", "Chandra"],
+          a: 1,
+          explain:
+            "Teleskop Hubble telah memberikan banyak gambar menakjubkan dari alam semesta.",
+        },
+        {
+          q: "Apa nama fenomena ketika sebuah bintang meledak di akhir siklus hidupnya?",
+          opts: ["Nebula", "Supernova", "Quasar", "Pulsar"],
+          a: 1,
+          explain:
+            "Supernova adalah ledakan dahsyat yang terjadi pada akhir siklus hidup bintang masif.",
+        },
+      ];
+
+      
+      
+
+      /* ====== App State ====== */
+      let state = {
+        questions: QUESTIONS,
+        index: 0,
+        answers: Array(QUESTIONS.length).fill(null), // store selected option index or null
+        score: 0,
+      };
+
+      /* ====== DOM refs ====== */
+      const questionText = document.getElementById("questionText");
+      const optionsList = document.getElementById("optionsList");
+      const progressBar = document.getElementById("progressBar");
+      const qcount = document.getElementById("qcount");
+      const totalEl = document.getElementById("total");
+      const scoreEl = document.getElementById("score");
+      const correctEl = document.getElementById("correctCount");
+      const wrongEl = document.getElementById("wrongCount");
+      const leftEl = document.getElementById("leftCount");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const saveBtn = document.getElementById("saveBtn");
+      const loadBtn = document.getElementById("loadBtn");
+      const explainCard = document.getElementById("explainCard");
+      const explainText = document.getElementById("explainText");
+
+      totalEl.textContent = state.questions.length;
+
+      /* ====== Render logic ====== */
+      function renderQuestion() {
+        const q = state.questions[state.index];
+        qcount.textContent = state.index + 1;
+        questionText.textContent = q.q;
+        optionsList.innerHTML = "";
+
+        q.opts.forEach((opt, i) => {
+          const div = document.createElement("div");
+          div.className = "opt fade-in";
+          div.setAttribute("role", "button");
+          div.setAttribute("tabindex", "0");
+          div.dataset.idx = i;
+          div.innerHTML = `<span class="label">${String.fromCharCode(
+            65 + i
+          )}</span><div class="text">${opt}</div>`;
+          // highlight previously selected
+          if (state.answers[state.index] === i) div.classList.add("selected");
+          div.onclick = () => selectOption(i);
+          div.onkeypress = (e) => {
+            if (e.key === "Enter" || e.key === " ") selectOption(i);
+          };
+          optionsList.appendChild(div);
+        });
+
+        // progress
+        const pct = Math.round((state.index / state.questions.length) * 100);
+        progressBar.style.width = pct + "%";
+
+        // controls state
+        prevBtn.disabled = state.index === 0;
+        nextBtn.disabled = state.index === state.questions.length - 1;
+
+        // update stats
+        updateStats();
+
+        // hide explanation unless answered
+        const currentAnswer = state.answers[state.index];
+        if (currentAnswer === null) {
+          explainCard.style.display = "none";
+        } else {
+          showExplanation();
+        }
+      }
+
+      function selectOption(idx) {
+        state.answers[state.index] = idx;
+        // instant visual feedback
+        Array.from(optionsList.children).forEach((child) => {
+          child.classList.remove("selected", "correct", "wrong");
+          const childIdx = Number(child.dataset.idx);
+          if (state.answers[state.index] === childIdx)
+            child.classList.add("selected");
+        });
+        updateStats();
+        // show right/wrong coloring if we already submitted (or auto-check)
+        // For this simple app, we'll reveal correctness immediately:
+        revealCorrectness();
+        // show explanation if available
+        showExplanation();
+      }
+
+      function revealCorrectness() {
+        const q = state.questions[state.index];
+        Array.from(optionsList.children).forEach((child) => {
+          const i = Number(child.dataset.idx);
+          child.classList.remove("correct", "wrong");
+          if (i === q.a) child.classList.add("correct");
+          else if (state.answers[state.index] === i)
+            child.classList.add("wrong");
+        });
+      }
+
+      function showExplanation() {
+        const q = state.questions[state.index];
+        if (q.explain) {
+          explainCard.style.display = "block";
+          explainText.textContent = q.explain;
+        } else {
+          explainCard.style.display = "none";
+        }
+      }
+
+      function updateStats() {
+        const total = state.questions.length;
+        const answered = state.answers.filter((v) => v !== null).length;
+        let correct = 0;
+        state.answers.forEach((ans, idx) => {
+          if (ans !== null && ans === state.questions[idx].a) correct++;
+        });
+        const wrong = answered - correct;
+        scoreEl.textContent = Math.round((correct / total) * 100);
+        correctEl.textContent = correct;
+        wrongEl.textContent = wrong;
+        leftEl.textContent = total - answered;
+      }
+
+      /* ====== Navigation ====== */
+      prevBtn.addEventListener("click", () => {
+        if (state.index > 0) {
+          state.index--;
+          renderQuestion();
+        }
+      });
+      nextBtn.addEventListener("click", () => {
+        if (state.index < state.questions.length - 1) {
+          state.index++;
+          renderQuestion();
+        }
+      });
+
+      /* Submit: final review and show summary modal (simple alert for now) */
+      submitBtn.addEventListener("click", () => {
+        const total = state.questions.length;
+        const correct = state.answers.reduce(
+          (acc, ans, idx) => acc + (ans === state.questions[idx].a ? 1 : 0),
+          0
+        );
+        alert(
+          `Selesai!\nSkor: ${correct} / ${total} (${Math.round(
+            (correct / total) * 100
+          )}%)\n\nRefresh halaman untuk ulang, atau klik 'Mulai Ulang'.`
+        );
+      });
+
+      /* Reset */
+      resetBtn.addEventListener("click", () => {
+        if (!confirm("Mulai ulang kuis? Semua progress lokal akan hilang."))
+          return;
+        state.index = 0;
+        state.answers = Array(state.questions.length).fill(null);
+        updateStats();
+        renderQuestion();
+        localStorage.removeItem("myquiz_progress_v1");
+      });
+
+      /* Save / Load progress via localStorage */
+      saveBtn.addEventListener("click", () => {
+        const payload = { index: state.index, answers: state.answers };
+        localStorage.setItem("myquiz_progress_v1", JSON.stringify(payload));
+        alert("Progress disimpan di browser (localStorage).");
+      });
+      loadBtn.addEventListener("click", () => {
+        const raw = localStorage.getItem("myquiz_progress_v1");
+        if (!raw) return alert("Tidak ada progress tersimpan.");
+        try {
+          const data = JSON.parse(raw);
+          state.answers =
+            data.answers || Array(state.questions.length).fill(null);
+          state.index = Math.min(data.index || 0, state.questions.length - 1);
+          renderQuestion();
+          alert("Progress dimuat.");
+        } catch (e) {
+          alert("Gagal memuat progress.");
+        }
+      });
+
+      /* Keyboard shortcuts: 1-4 untuk pilih, arrow left/right untuk pindah, Enter untuk submit */
+      document.addEventListener("keydown", (e) => {
+        // number keys
+        if (e.key >= "1" && e.key <= "9") {
+          const n = Number(e.key) - 1;
+          const opts = state.questions[state.index].opts.length;
+          if (n < opts) selectOption(n);
+        }
+        if (e.key === "ArrowRight") nextBtn.click();
+        if (e.key === "ArrowLeft") prevBtn.click();
+        if (e.key === "Enter") submitBtn.click();
+      });
+
+      /* Save progress automatically when leaving page */
+      window.addEventListener("beforeunload", () => {
+        const payload = { index: state.index, answers: state.answers };
+        localStorage.setItem("myquiz_autosave_v1", JSON.stringify(payload));
+      });
+
+      /* Restore autosave on load (if exists) */
+      (function restoreAuto() {
+        const raw = localStorage.getItem("myquiz_autosave_v1");
+        if (!raw) return renderQuestion();
+        try {
+          const data = JSON.parse(raw);
+          state.answers = data.answers || state.answers;
+          state.index = Math.min(data.index || 0, state.questions.length - 1);
+        } catch (e) {}
+        renderQuestion();
+      })();
+
+      /* initial render */
+      renderQuestion();
+    </script>
+  </body>
+</html>

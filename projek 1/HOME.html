@@ -10,11 +10,11 @@
       }
       body {
         font-family: Arial, sans-serif;
-        background: #f7f7f7;
+        background: #c2cbd3;
         text-align: center;
         margin: 0;
         padding: 0;
-        margin-top: 50px;
+        margin-top: 10px;
       }
       .navbar {
         position: relative;
@@ -22,7 +22,7 @@
         justify-content: center;
         align-items: center;
         margin: 10px;
-        background-color: #fff;
+        background-color: #313851;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         overflow-x: auto;
@@ -30,13 +30,14 @@
       .navbar ul {
         list-style: none;
         display: flex;
-        padding: 0;
+        padding: 5px;
         margin: 0;
         position: relative;
+        transition: ease-in-out;
       }
       .navbar a {
         text-decoration: none;
-        color: #333;
+        color: #f6f3ed;
         padding: 10px 20px;
         position: relative;
         z-index: 1;
@@ -44,6 +45,8 @@
         transition: color 0.3s;
         font-size: 1rem;
         display: block;
+        text-shadow: 2px 2px 4px rgb(0, 0, 2);
+        
       }
       .navbar a.active {
         color: #ff5722;
@@ -54,13 +57,17 @@
         top: 0;
         left: 0;
         height: 100%;
-        background: rgba(255, 87, 34, 0.12);
+        background: rgba(255, 60, 0, 0.12);
         border-radius: 20px;
         box-shadow: 0 2px 8px rgba(255, 87, 34, 0.08);
         transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
           width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 0;
         pointer-events: none;
+      }
+
+      .navbar:hover{
+        transform: scale(1.5);
       }
       /* Responsive styles */
       @media (max-width: 600px) {
@@ -89,7 +96,7 @@
       }
       .kiri {
         flex: 4;
-        background: #fff;
+        background: #c2cbd3;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -97,14 +104,14 @@
       }
       .kanan {
         flex: 6;
-        background: #fff;
+        background: #c2cbd3;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         text-align: left;
       }
       .title {
-        background: #fff;
+        background: #c2cbd3;
         margin: 17px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -133,11 +140,9 @@
       <ul>
         <span class="highlight"></span>
         <li><a href="home.html">Home</a></li>
-        <li><a href="about.html">Tentang</a></li>
-        <li><a href="service.html">Layanan</a></li>
-        <li><a href="portofolio.html">Kontak</a></li>
-        <li><a href="blog.html">Kontak</a></li>
-        <li><a href="contact.html">Kontak</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="project.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <div id="page-content">
@@ -154,13 +159,13 @@
           />
           <h1>Viendar Faza Prasetya</h1>
           <p>Web Developer | Programmer | Designer</p>
+          <!--<p>
           <p>
             Halo! Saya Viendar Faza Prasetya, seorang web developer yang
             bersemangat menciptakan solusi digital yang inovatif dan menarik.
             Dengan pengalaman dalam pengembangan web, saya berkomitmen untuk
             memberikan hasil terbaik bagi setiap proyek yang saya tangani.
           </p>
-          <p>
             Keahlian saya meliputi HTML, CSS, JavaScript, dan berbagai framework
             populer seperti React dan Vue.js. Saya juga memiliki pengalaman
             dalam desain UI/UX untuk memastikan bahwa setiap aplikasi tidak
@@ -171,7 +176,7 @@
             Jangan ragu untuk menghubungi saya jika Anda tertarik untuk bekerja
             sama atau ingin mengetahui lebih lanjut tentang apa yang saya
             lakukan.
-          </p>
+          </p>-->
         </div>
         <div class="kanan">
           <h2 id="home">home</h2>
@@ -179,29 +184,7 @@
           <p>
             <!-- ... (content omitted for brevity) ... -->
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-            nemo. Facere velit quasi dolor cum repellendus laborum quibusdam
-            officiis cupiditate placeat aliquam distinctio sunt aut eveniet,
-            tenetur eaque dolorem odio inventore unde? Alias ipsa beatae minus
-            ducimus cumque dolorem ad tenetur fuga mollitia? Sit, debitis quae
-            dicta autem, reprehenderit quas nisi molestiae est doloribus id
-            totam laudantium soluta repellat atque esse fuga sequi ipsam quos
-            distinctio laborum tempora assumenda error. Odio doloribus
-            necessitatibus non facilis omnis animi natus, quis in tenetur
-            fugiat. Quia impedit harum aut similique debitis odit laborum quos
-            blanditiis quae sapiente obcaecati delectus corrupti quam sit
-            nostrum, totam id unde reiciendis voluptatum accusantium, labore
-            corporis! Pariatur, perferendis suscipit veniam, eveniet corporis
-            beatae molestiae dolore animi voluptas amet reprehenderit. Maiores
-            rem nostrum perspiciatis, blanditiis labore aliquam cupiditate
-            numquam laborum sed. Nisi fugit temporibus et explicabo minus.
-            Debitis pariatur ad nulla aperiam harum suscipit, natus dicta,
-            consectetur adipisci, quia necessitatibus accusamus alias ratione?
-            Ad illum quam tempore eius praesentium molestias accusantium fugit
-            ullam beatae. Voluptatibus porro esse minima laboriosam magnam
-            facilis enim cumque, nobis officiis aperiam voluptas adipisci veniam
-            minus impedit explicabo dolorem. Cupiditate sit facere molestias!
-            Doloremque nobis exercitationem incidunt consequatur quod itaque nam
-            odit pariatur recusandae temporibus.
+            nemo. 
           </p>
         </div>
       </div>

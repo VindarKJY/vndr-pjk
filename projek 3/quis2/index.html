@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kuis Interaktif</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-screen" id="login-screen">
+    <h2>Masuk untuk Memulai</h2>
+    <input type="text" id="username" placeholder="Masukkan Username">
+    <button id="login-btn">Login</button>
+  </div>
+
+  <div class="quiz-container hidden" id="quiz-container">
+    <header>
+      <h1>Kuis Interaktif</h1>
+      <div class="score-board">
+        <span id="user-display"></span> | Skor: <span id="score">0</span>
+      </div>
+      <div class="timer">Sisa Waktu: <span id="timer">15</span> detik</div>
+    </header>
+
+    <div id="question-container"></div>
+
+    <div class="controls">
+      <button id="prev-btn">Prev</button>
+      <button id="next-btn">Next</button>
+      <button id="restart-btn">Mulai Ulang</button>
+      <button id="load-btn">Muat Progress</button>
+      <button id="submit-btn">Submit</button>
+    </div>
+
+    <div class="final-score hidden" id="final-score"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
